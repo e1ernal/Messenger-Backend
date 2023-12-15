@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
+from rest_framework.authtoken.models import Token
 
 
 class CustomUserManager(BaseUserManager):
@@ -9,6 +10,7 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_('Phone number not exists'))
         user = self.model(phone_number=phone_number, **extra_fields)
         user.save()
+        Token.objects.create(user=user)
         return user
 
     def create_superuser(self, phone_number, **extra_fields):

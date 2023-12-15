@@ -19,11 +19,6 @@ class VerificationCodeCreateView(APIView):
             return Response({
                 'error': 'Номер телефона обязательное поле'
             }, status=status.HTTP_400_BAD_REQUEST)
-        user = User.objects.filter(phone_number=request.data['phone_number'])
-        if user.exists():
-            return Response({
-                'error': 'Пользователь с таким номером уже существует'
-            })
         code = generate_code()
         response = requests.get(f'https://sms.ru/sms/send?api_id={SMS_RU_API_ID}3&to={request.data["phone_number"]}&msg={code}&json=1')
         request.session['phone_number'] = request.data['phone_number']
@@ -47,6 +42,13 @@ class VerificationCodeConfirmView(APIView):
             return Response({
                 'error': 'Не верный код подтверждения'
             }, status=status.HTTP_400_BAD_REQUEST)
+        user = User.objects.filter(phone_number=request.data['phone_number'])
+        if user.exists():
+            del request.session[request.session['phone_number']]
+            del request.session['phone_number']
+            return Response({
+                'token': str(user.first().auth_token)
+            })
         request.session['response'] = True
         return Response({
             'response': request.session['response']
