@@ -1,0 +1,1 @@
+from models_app.admin.users import UserAdmin
