@@ -6,6 +6,11 @@ name = "pypi"
 [packages]
 pipenv = "*"
 django = "==4.0"
+djangorestframework = "*"
+twilio = "*"
+pillow = "*"
+django-rest-swagger = "*"
+drf-yasg = "*"
 
 [dev-packages]
 
