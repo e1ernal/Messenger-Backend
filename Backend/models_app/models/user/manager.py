@@ -5,10 +5,13 @@ from rest_framework.authtoken.models import Token
 
 class CustomUserManager(BaseUserManager):
     """Custom user model manager where email is the unique identifiers for authentication instead of usernames."""
+
     def create_user(self, phone_number, **extra_fields):
         if not phone_number:
             raise ValueError(_('Phone number not exists'))
         user = self.model(phone_number=phone_number, **extra_fields)
+        if extra_fields.get('password'):
+            user.set_password(extra_fields['password'])
         user.save()
         Token.objects.create(user=user)
         return user
@@ -17,6 +20,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
+        extra_fields.setdefault('username', phone_number)
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError(_('Superuser must have is_staff=True.'))

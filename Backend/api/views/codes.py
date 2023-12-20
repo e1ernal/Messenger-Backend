@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 
 from api.docs.codes import VERIFICATION_CODES, VERIFICATION_CODES_CONFIEM
 from api.utils import generate_code
-from conf.settings import SMS_RU_API_ID
+from conf.settings import SMSC_LOGIN, SMSC_PASSWORD
 from models_app.models import User
 
 
@@ -17,10 +17,15 @@ class VerificationCodeCreateView(APIView):
     def post(self, request, *args, **kwargs):
         if not request.data.get('phone_number'):
             return Response({
-                'error': 'Номер телефона обязательное поле'
+                'error': 'phone_number обязательное поле'
             }, status=status.HTTP_400_BAD_REQUEST)
         code = generate_code()
-        response = requests.get(f'https://sms.ru/sms/send?api_id={SMS_RU_API_ID}3&to={request.data["phone_number"]}&msg={code}&json=1')
+        response = requests.post('https://smsc.ru/rest/send/', data={
+            'login': SMSC_LOGIN,
+            'psw': SMSC_PASSWORD,
+            'phones': request.data['phone_number'],
+            'mes': f'Код подтверждения: {code}'
+        })
         request.session['phone_number'] = request.data['phone_number']
         request.session[request.session['phone_number']] = code
         return Response(response.json() | {'code': code}, status=status.HTTP_200_OK)
@@ -36,7 +41,7 @@ class VerificationCodeConfirmView(APIView):
             }, status=status.HTTP_400_BAD_REQUEST)
         if not request.data.get('code'):
             return Response({
-                'error': 'Код подтверждения обязательное поле'
+                'error': 'code обязательное поле'
             }, status=status.HTTP_400_BAD_REQUEST)
         if request.session[request.session['phone_number']] != request.data['code']:
             return Response({

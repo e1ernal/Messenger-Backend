@@ -11,6 +11,14 @@ USER_CREATE = {
                           description="Фаимилия пользователя",
                           type=openapi.TYPE_STRING,
                           required=False),
+        openapi.Parameter('image', openapi.IN_QUERY,
+                          description="Фото",
+                          type=openapi.TYPE_STRING,
+                          required=True),
+        openapi.Parameter('username', openapi.IN_QUERY,
+                          description="Никнейм пользователя",
+                          type=openapi.TYPE_STRING,
+                          required=True),
     ],
     "responses": {
         status.HTTP_200_OK: openapi.Response(
@@ -32,10 +40,39 @@ USER_ME = {
                 "application/json": {
                     "id": "1",
                     "first_name": "Egor",
+                    "username": "egor4ick",
                     "last_name": "Egorov",
                     "phone_number": "+79991113344",
                     "image": "/uploads/colorings/index.jpg"
                 }
+            },
+        )
+    },
+}
+
+USER_USERNAME = {
+    'manual_parameters': [
+        openapi.Parameter('username', openapi.IN_QUERY,
+                          description="Никнейм пользователя",
+                          type=openapi.TYPE_STRING,
+                          required=True),
+    ],
+    "responses": {
+        status.HTTP_200_OK: openapi.Response(
+            "Success",
+            examples={
+                "application/json": {
+                    "username": "Никнейм свободен"
+                },
+            },
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            "Error",
+            examples={
+                "application/json": {
+                    "username": "Никнейм зянят",
+                    "error": "username обязательное поле"
+                },
             },
         )
     },

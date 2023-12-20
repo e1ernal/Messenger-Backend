@@ -13,6 +13,7 @@ class User(AbstractUser):
     image = models.ImageField(upload_to='users/', verbose_name='Изображение')
     username = models.CharField(
         _('username'),
+        unique=True,
         max_length=150,
         help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
         validators=[username_validator],
