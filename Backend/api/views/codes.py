@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 
 from api.docs.codes import VERIFICATION_CODES, VERIFICATION_CODES_CONFIEM
 from api.utils import generate_code
-from conf.settings import SMSC_LOGIN, SMSC_PASSWORD
+from api.smsc_api import SMSC_LOGIN, SMSC_PASSWORD
 from models_app.models import User
 
 
@@ -20,15 +20,11 @@ class VerificationCodeCreateView(APIView):
                 'error': 'phone_number обязательное поле'
             }, status=status.HTTP_400_BAD_REQUEST)
         code = generate_code()
-        response = requests.post('https://smsc.ru/rest/send/', data={
-            'login': SMSC_LOGIN,
-            'psw': SMSC_PASSWORD,
-            'phones': request.data['phone_number'],
-            'mes': f'Код подтверждения: {code}'
-        })
+        response = requests.get(
+            f'https://smsc.ru/sys/send.php?login={SMSC_LOGIN}&psw={SMSC_PASSWORD}&phones={request.data["phone_number"]}&mes={code}')
         request.session['phone_number'] = request.data['phone_number']
         request.session[request.session['phone_number']] = code
-        return Response(response.json() | {'code': code}, status=status.HTTP_200_OK)
+        return Response({'code': code}, status=status.HTTP_200_OK)
 
 
 class VerificationCodeConfirmView(APIView):
