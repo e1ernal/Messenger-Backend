@@ -79,7 +79,7 @@ class UserUsernameCheckView(APIView):
 
     @swagger_auto_schema(**USER_USERNAME)
     def get(self, request, *args, **kwargs):
-        if not request.data['username']:
+        if not request.query_params.get('username'):
             return Response({
                 'error': 'username обязательное поле'
             }, status=status.HTTP_400_BAD_REQUEST)
