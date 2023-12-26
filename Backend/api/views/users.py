@@ -83,7 +83,7 @@ class UserUsernameCheckView(APIView):
             return Response({
                 'error': 'username обязательное поле'
             }, status=status.HTTP_400_BAD_REQUEST)
-        user = User.objects.filter(username=request.data['username'])
+        user = User.objects.filter(username=request.query_params['username'])
         if user.exists():
             return Response({
                 'username': 'Никнейм занят',
