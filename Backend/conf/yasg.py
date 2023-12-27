@@ -7,7 +7,7 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Messanger",
+        title="Messenger",
         default_version="v1",
         description="API for the Messanger",
         terms_of_service="https://www.google.com/policies/terms/",

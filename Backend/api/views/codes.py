@@ -43,10 +43,8 @@ class VerificationCodeConfirmView(APIView):
             return Response({
                 'error': 'Не верный код подтверждения'
             }, status=status.HTTP_400_BAD_REQUEST)
-        user = User.objects.filter(phone_number=request.data['phone_number'])
+        user = User.objects.filter(phone_number=request.session['phone_number'])
         if user.exists():
-            del request.session[request.session['phone_number']]
-            del request.session['phone_number']
             return Response({
                 'token': str(user.first().auth_token)
             })
