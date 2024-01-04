@@ -44,7 +44,7 @@ class UserCreateView(APIView):
             image = self.convert_base64_to_image(request.data['image'])
             user = User.objects.filter(
                 Q(username=request.data['username']) |
-                Q(phone_number=request.data['phone_number'])
+                Q(phone_number=request.session['phone_number'])
             )
             if user.exists():
                 return Response({
