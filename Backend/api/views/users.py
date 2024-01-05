@@ -41,7 +41,12 @@ class UserCreateView(APIView):
                 return Response({
                     'error': 'image обязательное поле'
                 }, status=status.HTTP_400_BAD_REQUEST)
-            image = self.convert_base64_to_image(request.data['image'])
+            try:
+                image = self.convert_base64_to_image(request.data['image'])
+            except Exception:
+                return Response({
+                    'error': 'image error'
+                }, status=status.HTTP_400_BAD_REQUEST)
             user = User.objects.filter(
                 Q(username=request.data['username']) |
                 Q(phone_number=request.session['phone_number'])
