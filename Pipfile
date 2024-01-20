@@ -11,6 +11,7 @@ twilio = "*"
 pillow = "*"
 django-rest-swagger = "*"
 drf-yasg = "*"
+django-service-objects = "*"
 
 [dev-packages]
 
