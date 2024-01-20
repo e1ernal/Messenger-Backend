@@ -6,10 +6,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from service_objects.errors import InvalidInputsError
 
-from api.docs.users import USER_CREATE, USER_ME, USER_USERNAME
+from api.docs.users import USER_CREATE, USER_ME, USER_USERNAME, USER_SEARCH
 from api.serializers import UserSerializer
 from api.serializers.codes.serializers import TokenSerializer
 from api.services.user.create import UserCreateService
+from api.services.user.search import UserSearchService
 from models_app.models import User
 
 
@@ -64,3 +65,19 @@ class UserUsernameCheckView(APIView):
         return Response({
             'username': 'Никнейм свободен'
         })
+
+
+class UserSearchView(APIView):
+
+    @swagger_auto_schema(**USER_SEARCH)
+    def get(self, request, *args, **kwargs):
+        try:
+            outcome = UserSearchService.execute({
+                'search': request.data.get('search')
+            })
+            return Response(
+                UserSerializer(outcome, many=True).data,
+                status=status.HTTP_200_OK
+            )
+        except InvalidInputsError as error:
+            return Response(error.errors, status=status.HTTP_400_BAD_REQUEST)

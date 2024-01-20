@@ -10,7 +10,7 @@ VERIFICATION_CODES = {
                           required=True),
     ],
     "responses": {
-        status.HTTP_200_OK: openapi.Response(
+        status.HTTP_201_CREATED: openapi.Response(
             "Success",
             examples={
                 "application/json": {
@@ -34,9 +34,12 @@ VERIFICATION_CODES_CONFIEM = {
             "Success",
             examples={
                 "application/json": {
-                    "response": True
+                    "token": 'asdasdasdasdasdasdsad'
                 }
             },
+        ),
+        status.HTTP_204_NO_CONTENT: openapi.Response(
+            "No content"
         )
     },
 }

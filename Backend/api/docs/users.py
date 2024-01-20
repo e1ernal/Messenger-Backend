@@ -77,3 +77,35 @@ USER_USERNAME = {
         )
     },
 }
+
+USER_SEARCH = {
+    'manual_parameters': [
+        openapi.Parameter('search', openapi.IN_QUERY,
+                          description="Значение для поиска пользователя",
+                          type=openapi.TYPE_STRING,
+                          required=True),
+    ],
+    "responses": {
+        status.HTTP_200_OK: openapi.Response(
+            "Success",
+            examples={
+                "application/json": [{
+                    "id": "1",
+                    "first_name": "Egor",
+                    "username": "egor4ick",
+                    "last_name": "Egorov",
+                    "phone_number": "+79991113344",
+                    "image": "/uploads/colorings/index.jpg"
+                }]
+            },
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            "Error",
+            examples={
+                "application/json": {
+                    "error": "search обязательное поле"
+                },
+            },
+        )
+    },
+}
