@@ -9,6 +9,7 @@ from service_objects.errors import InvalidInputsError
 from api.docs.users import USER_CREATE, USER_ME, USER_USERNAME, USER_SEARCH
 from api.serializers import UserSerializer
 from api.serializers.codes.serializers import TokenSerializer
+from api.services.user.check_username import UserCheckUsernameService
 from api.services.user.create import UserCreateService
 from api.services.user.search import UserSearchService
 from models_app.models import User
@@ -53,18 +54,19 @@ class UserUsernameCheckView(APIView):
 
     @swagger_auto_schema(**USER_USERNAME)
     def get(self, request, *args, **kwargs):
-        if not request.query_params.get('username'):
+        try:
+            UserCheckUsernameService.execute({
+                'username': request.query_params.get('username')
+            })
             return Response({
-                'error': 'username обязательное поле'
-            }, status=status.HTTP_400_BAD_REQUEST)
-        user = User.objects.filter(username=request.query_params['username'])
-        if user.exists():
+                'username': 'Никнейм свободен',
+            }, status=status.HTTP_200_OK)
+        except InvalidInputsError as error:
+            return Response(error.errors, status=status.HTTP_400_BAD_REQUEST)
+        except ValidationError as error:
             return Response({
-                'username': 'Никнейм занят',
+                'error': error.detail
             }, status=status.HTTP_400_BAD_REQUEST)
-        return Response({
-            'username': 'Никнейм свободен'
-        })
 
 
 class UserSearchView(APIView):
