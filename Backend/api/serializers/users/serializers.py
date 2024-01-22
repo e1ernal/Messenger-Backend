@@ -14,3 +14,13 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name',
             'image'
         )
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'first_name',
+            'last_name',
+        )

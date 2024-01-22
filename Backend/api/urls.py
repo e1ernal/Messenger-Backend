@@ -2,7 +2,7 @@ from django.urls import path
 
 from conf.yasg import urlpatterns as docs_urls
 from api.views import (VerificationCodeCreateView, VerificationCodeConfirmView, UserCreateView,
-                       UserUsernameCheckView, UserMeDetailView, UserSearchView)
+                       UserUsernameCheckView, UserMeDetailView, UserSearchView, UserUpdateView)
 
 urlpatterns = [
     # Codes
@@ -13,7 +13,8 @@ urlpatterns = [
     path('users/', UserCreateView.as_view()),
     path('users/search/', UserSearchView.as_view()),
     path('users/username/', UserUsernameCheckView.as_view()),
-    path('users/me/', UserMeDetailView.as_view())
+    path('users/me/', UserMeDetailView.as_view()),
+    path('users/<int:id>/', UserUpdateView.as_view())
 ]
 
 urlpatterns += docs_urls

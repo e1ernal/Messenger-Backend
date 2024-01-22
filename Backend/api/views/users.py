@@ -7,11 +7,12 @@ from rest_framework.views import APIView
 from service_objects.errors import InvalidInputsError
 
 from api.docs.users import USER_CREATE, USER_ME, USER_USERNAME, USER_SEARCH
-from api.serializers import UserSerializer
+from api.serializers import UserSerializer, UserUpdateSerializer
 from api.serializers.codes.serializers import TokenSerializer
 from api.services.user.check_username import UserCheckUsernameService
 from api.services.user.create import UserCreateService
 from api.services.user.search import UserSearchService
+from api.services.user.update import UserUpdateService
 from models_app.models import User
 
 
@@ -40,6 +41,25 @@ class UserCreateView(APIView):
         return Response({
             'error': 'Сначала подтвердите свой номер'
         }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserUpdateView(APIView):
+    def patch(self, request, *args, **kwargs):
+
+        try:
+            outcome = UserUpdateService.execute({
+                'id': kwargs["id"],
+                'username': request.data.get('username'),
+                'first_name': request.data.get('first_name'),
+                'last_name': request.data.get('last_name'),
+            })
+            return Response(UserUpdateSerializer(outcome).data, status=status.HTTP_200_OK)
+        except InvalidInputsError as error:
+            return Response(error.errors, status=status.HTTP_400_BAD_REQUEST)
+        except ValidationError as error:
+            return Response({
+                'error': error.detail
+            }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserMeDetailView(APIView):
