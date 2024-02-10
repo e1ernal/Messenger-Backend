@@ -14,7 +14,7 @@ urlpatterns = [
     path('users/search/', UserSearchView.as_view()),
     path('users/username/', UserUsernameCheckView.as_view()),
     path('users/me/', UserMeDetailView.as_view()),
-    path('users/<int:id>/', UserUpdateView.as_view())
+    path('users/update/', UserUpdateView.as_view())
 ]
 
 urlpatterns += docs_urls
