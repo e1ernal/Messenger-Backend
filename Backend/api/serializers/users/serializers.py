@@ -15,6 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
             'image'
         )
 
+
 class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -23,4 +24,5 @@ class UserUpdateSerializer(serializers.ModelSerializer):
             'username',
             'first_name',
             'last_name',
+            'image'
         )

@@ -53,6 +53,7 @@ class UserUpdateView(APIView):
                 'username': request.data.get('username'),
                 'first_name': request.data.get('first_name'),
                 'last_name': request.data.get('last_name'),
+                'image': request.data.get('image')
             })
             return Response(UserUpdateSerializer(outcome).data, status=status.HTTP_200_OK)
         except InvalidInputsError as error:
