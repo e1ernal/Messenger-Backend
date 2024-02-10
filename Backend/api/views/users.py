@@ -91,6 +91,7 @@ class UserUsernameCheckView(APIView):
 
 
 class UserSearchView(APIView):
+    permission_classes = (IsAuthenticated,)
 
     @swagger_auto_schema(**USER_SEARCH)
     def get(self, request, *args, **kwargs):

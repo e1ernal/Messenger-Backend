@@ -5,6 +5,7 @@ from models_app.models import User
 
 
 class UserSearchService(Service):
+
     search = forms.CharField()
 
     def process(self):
