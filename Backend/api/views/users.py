@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from service_objects.errors import InvalidInputsError
 
-from api.docs.users import USER_CREATE, USER_ME, USER_USERNAME, USER_SEARCH
+from api.docs.users import USER_CREATE, USER_ME, USER_USERNAME, USER_SEARCH, USER_UPDATE
 from api.serializers import UserSerializer, UserUpdateSerializer
 from api.serializers.codes.serializers import TokenSerializer
 from api.services.user.check_username import UserCheckUsernameService
@@ -46,6 +46,7 @@ class UserCreateView(APIView):
 class UserUpdateView(APIView):
     permission_classes = (IsAuthenticated,)
 
+    @swagger_auto_schema(**USER_UPDATE)
     def patch(self, request, *args, **kwargs):
         try:
             outcome = UserUpdateService.execute({

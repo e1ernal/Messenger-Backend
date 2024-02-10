@@ -109,3 +109,46 @@ USER_SEARCH = {
         )
     },
 }
+
+USER_UPDATE = {
+    'manual_parameters': [
+        openapi.Parameter('username', openapi.IN_QUERY,
+                          description="Ник пользователя",
+                          type=openapi.TYPE_STRING,
+                          required=False),
+        openapi.Parameter('first_name', openapi.IN_QUERY,
+                          description="Имя пользователя",
+                          type=openapi.TYPE_STRING,
+                          required=False),
+        openapi.Parameter('last_name', openapi.IN_QUERY,
+                          description="Фамилия пользователя",
+                          type=openapi.TYPE_STRING,
+                          required=False),
+        openapi.Parameter('image', openapi.IN_QUERY,
+                          description="Фото пользователя в формате bs64",
+                          type=openapi.TYPE_STRING,
+                          required=False),
+    ],
+    "responses": {
+        status.HTTP_200_OK: openapi.Response(
+            "Success",
+            examples={
+                "application/json": {
+                    "id": "1",
+                    "first_name": "Egor",
+                    "username": "egor4ick",
+                    "last_name": "Egorov",
+                    "image": "/uploads/colorings/index.jpg"
+                }
+            },
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            "Error",
+            examples={
+                "application/json": {
+                    "error": "ошибка запроса"
+                },
+            },
+        )
+    },
+}
