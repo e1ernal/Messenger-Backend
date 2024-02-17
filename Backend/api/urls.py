@@ -2,7 +2,8 @@ from django.urls import path
 
 from conf.yasg import urlpatterns as docs_urls
 from api.views import (VerificationCodeCreateView, VerificationCodeConfirmView, UserCreateView,
-                       UserUsernameCheckView, UserMeDetailView, UserSearchView, UserUpdateView)
+                       UserUsernameCheckView, UserMeDetailView, UserSearchView, UserUpdateView,
+                       DirectChatCreateView, DirectChatDeleteView, DirectChatListView)
 
 urlpatterns = [
     # Codes
@@ -14,7 +15,12 @@ urlpatterns = [
     path('users/search/', UserSearchView.as_view()),
     path('users/username/', UserUsernameCheckView.as_view()),
     path('users/me/', UserMeDetailView.as_view()),
-    path('users/update/', UserUpdateView.as_view())
+    path('users/update/', UserUpdateView.as_view()),
+    path('users/<int:id>/direct_chats/', DirectChatCreateView.as_view()),
+
+    # Direct chats
+    path('direct_chats/', DirectChatListView.as_view()),
+    path('direct_chats/<int:id>/', DirectChatDeleteView.as_view())
 ]
 
 urlpatterns += docs_urls
