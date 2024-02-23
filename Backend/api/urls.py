@@ -3,7 +3,7 @@ from django.urls import path
 from conf.yasg import urlpatterns as docs_urls
 from api.views import (VerificationCodeCreateView, VerificationCodeConfirmView, UserCreateView,
                        UserUsernameCheckView, UserMeDetailView, UserSearchView, UserUpdateView,
-                       DirectChatCreateView, DirectChatDeleteView, DirectChatListView)
+                       DirectChatCreateView, DirectChatDeleteView, DirectChatListView, UserDeleteView)
 
 urlpatterns = [
     # Codes
@@ -17,6 +17,7 @@ urlpatterns = [
     path('users/me/', UserMeDetailView.as_view()),
     path('users/update/', UserUpdateView.as_view()),
     path('users/<int:id>/direct_chats/', DirectChatCreateView.as_view()),
+    path('users/delete/', UserDeleteView.as_view()),
 
     # Direct chats
     path('direct_chats/', DirectChatListView.as_view()),

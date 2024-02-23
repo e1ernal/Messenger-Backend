@@ -11,9 +11,9 @@ from api.serializers import UserSerializer, UserUpdateSerializer
 from api.serializers.codes.serializers import TokenSerializer
 from api.services.user.check_username import UserCheckUsernameService
 from api.services.user.create import UserCreateService
+from api.services.user.delete import UserDeleteService
 from api.services.user.search import UserSearchService
 from api.services.user.update import UserUpdateService
-from models_app.models import User
 
 
 class UserCreateView(APIView):
@@ -41,6 +41,16 @@ class UserCreateView(APIView):
         return Response({
             'error': 'Сначала подтвердите свой номер'
         }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserDeleteView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def delete(self, request, *args, **kwargs):
+        UserDeleteService.execute({
+            'user': request.user
+        })
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class UserUpdateView(APIView):
