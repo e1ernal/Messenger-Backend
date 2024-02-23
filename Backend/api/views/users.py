@@ -99,7 +99,7 @@ class UserSearchView(APIView):
     def get(self, request, *args, **kwargs):
         try:
             outcome = UserSearchService.execute({
-                'search': request.data.get('search')
+                'search': request.query_params.get('search')
             })
             return Response(
                 UserSerializer(outcome, many=True).data,
