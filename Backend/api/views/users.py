@@ -110,6 +110,7 @@ class UserSearchView(APIView):
         try:
             outcome = UserSearchService.execute({
                 'search': request.query_params.get('search')
+                'user': request.user
             })
             return Response(
                 UserSerializer(outcome, many=True).data,
