@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
@@ -5,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from service_objects.errors import InvalidInputsError
 
+from api.docs.messages import MESSAGE_CREATE
 from api.serializers.messages.serializers import MessageSerializer
 from api.services.message.create import MessageCreateService
 
@@ -12,6 +14,7 @@ from api.services.message.create import MessageCreateService
 class MessageCreateView(APIView):
     permission_classes = (IsAuthenticated,)
 
+    @swagger_auto_schema(**MESSAGE_CREATE)
     def post(self, request, *args, **kwargs):
         try:
             outcome = MessageCreateService.execute({

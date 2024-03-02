@@ -18,9 +18,16 @@ class DirectChatSerializer(serializers.ModelSerializer):
 
 
 class DirectChatListSerializer(serializers.ModelSerializer):
+    last_message = serializers.CharField(source='last_message.text', default=None)
+    last_message_created = serializers.CharField(source='last_message.created_at', default=None)
+    direct_id = serializers.IntegerField()
+
     class Meta:
         model = User
         fields = (
             'username',
-            'image'
+            'image',
+            'last_message',
+            'last_message_created',
+            'direct_id'
         )

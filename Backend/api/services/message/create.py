@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from django import forms
 from rest_framework.exceptions import ValidationError
 from service_objects.fields import ModelField
@@ -12,16 +14,21 @@ class MessageCreateService(Service):
     text = forms.CharField()
 
     def process(self):
+        self._direct_chat
         return self.create_message()
 
     def create_message(self):
-        direct_chat = DirectChat.objects.filter(id=self.cleaned_data['direct'])
-        if not direct_chat.exists():
-            raise ValidationError("Chat not found")
-
         message = Message.objects.create(
             author=self.cleaned_data['author'],
-            direct=self.cleaned_data['direct'],
+            direct=self._direct_chat,
             text=self.cleaned_data['text']
         )
         return message
+
+    @property
+    @lru_cache()
+    def _direct_chat(self):
+        direct_chat = DirectChat.objects.filter(id=self.cleaned_data['direct'])
+        if not direct_chat.exists():
+            raise ValidationError("Chat not found")
+        return direct_chat.first()

@@ -2,7 +2,7 @@ from django.db.models import Q
 from service_objects.fields import ModelField
 from service_objects.services import Service
 
-from models_app.models import User, DirectChat
+from models_app.models import User, DirectChat, Message
 
 
 class DirectChatListService(Service):
@@ -19,5 +19,7 @@ class DirectChatListService(Service):
         interlocutors = []
         for chat in direct_chats:
             interlocutor = chat.first_user if chat.first_user != self.cleaned_data['user'] else chat.second_user
+            interlocutor.last_message = Message.objects.filter(direct=chat).order_by('created_at').last()
+            interlocutor.direct_id = chat.id
             interlocutors.append(interlocutor)
         return interlocutors

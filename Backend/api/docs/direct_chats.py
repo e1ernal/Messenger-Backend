@@ -95,11 +95,17 @@ DIRECT_CHATS_LIST = {
                     "interlocutors": [
                         {
                             "username": "Egor",
-                            "image": "/uploads/colorings/index.jpg"
+                            "image": "/uploads/colorings/index.jpg",
+                            "last_message": "text",
+                            "last_message_created": "2024-03-02 14:54:10.122957+00:00",
+                            "direct_id": 9
                         },
                         {
                             "username": "Egor1111",
-                            "image": "/uploads/colorings/index111.jpg"
+                            "image": "/uploads/colorings/index111.jpg",
+                            "last_message": None,
+                            "last_message_created": None,
+                            "direct_id": 10
                         },
                     ]
                 }
