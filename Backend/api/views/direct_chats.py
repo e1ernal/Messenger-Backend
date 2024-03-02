@@ -21,7 +21,8 @@ class DirectChatCreateView(APIView):
         try:
             outcome = DirectChatCreateService.execute({
                 'first_user': request.user,
-                'second_user': kwargs['id']
+                'second_user': kwargs['id'],
+                'encrypted_key': request.data.get('encrypted_key')
             })
             return Response({
                 'interlocutor': DirectChatSerializer(outcome).data
