@@ -24,6 +24,9 @@ urlpatterns = [
     path('direct_chats/', DirectChatListView.as_view()),
     path('direct_chats/<int:id>/', DirectChatDeleteView.as_view()),
     path('direct_chats/<int:id>/messages/', MessageCreateView.as_view()),
+
+    # Tests
+    path('<int:pk>/', HomePageRenderView.as_view())
 ]
 
 urlpatterns += docs_urls
