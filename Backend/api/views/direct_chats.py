@@ -24,9 +24,7 @@ class DirectChatCreateView(APIView):
                 'second_user': kwargs['id'],
                 'encrypted_key': request.data.get('encrypted_key')
             })
-            return Response({
-                'interlocutor': DirectChatSerializer(outcome).data
-            }, status=status.HTTP_201_CREATED)
+            return Response(DirectChatSerializer(outcome).data, status=status.HTTP_201_CREATED)
         except InvalidInputsError as error:
             return Response(error.errors, status=status.HTTP_400_BAD_REQUEST)
         except ValidationError as error:

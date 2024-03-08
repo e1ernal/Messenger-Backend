@@ -97,6 +97,7 @@ DIRECT_CHATS_LIST = {
                 "application/json":
                     [
                         {
+                            "username": "Egorrr",
                             "first_name": "Egor",
                             "last_name": "Egorov",
                             "image": "/uploads/colorings/index.jpg",
@@ -105,6 +106,7 @@ DIRECT_CHATS_LIST = {
                             "direct_id": 9
                         },
                         {
+                            "username": "Egorrr",
                             "first_name": "Egor",
                             "last_name": "Egorov",
                             "image": "/uploads/colorings/index111.jpg",
