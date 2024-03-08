@@ -1,6 +1,6 @@
 from django.urls import path
 
-from api.views.messages import MessageCreateView
+from api.views.messages import MessageListCreateView
 from conf.yasg import urlpatterns as docs_urls
 from api.views import (VerificationCodeCreateView, VerificationCodeConfirmView, UserCreateView,
                        UserUsernameCheckView, UserMeDetailView, UserSearchView, UserUpdateView,
@@ -23,7 +23,7 @@ urlpatterns = [
     # Direct chats
     path('direct_chats/', DirectChatListView.as_view()),
     path('direct_chats/<int:id>/', DirectChatDeleteView.as_view()),
-    path('direct_chats/<int:id>/messages/', MessageCreateView.as_view()),
+    path('direct_chats/<int:id>/messages/', MessageListCreateView.as_view()),
 
     # Tests
     path('<int:pk>/', HomePageRenderView.as_view())
