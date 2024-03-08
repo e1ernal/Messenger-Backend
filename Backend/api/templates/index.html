@@ -9,7 +9,7 @@
 <button id="button">send</button>
 <script type="text/javascript">
 
-        const socket = new WebSocket('ws://127.0.0.1:8000/ws/direct_chat/{{pk}}/');
+        const socket = new WebSocket('ws://${window.location.host}/ws/direct_chat/{{pk}}/');
 
         socket.onmessage = function (e) {
             const data = JSON.parse(e.data);
