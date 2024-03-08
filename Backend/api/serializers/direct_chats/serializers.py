@@ -7,6 +7,7 @@ class DirectChatSerializer(serializers.ModelSerializer):
     chat_id = serializers.IntegerField(source='id')
     first_name = serializers.CharField(source='second_user.first_name')
     last_name = serializers.CharField(source='second_user.last_name')
+    username = serializers.CharField(source='second_user.username')
     image = serializers.ImageField(source='second_user.image')
 
     class Meta:
