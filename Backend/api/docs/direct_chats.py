@@ -17,12 +17,10 @@ DIRECT_CHATS_CREATE = {
             "Success",
             examples={
                 "application/json": {
-                    "interlocutor": {
                         "chat_id": "1",
                         "first_name": "Egor",
                         "last_name": "Egorov",
                         "image": "/uploads/colorings/index.jpg"
-                    }
                 }
             },
         ),
