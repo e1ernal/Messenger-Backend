@@ -57,4 +57,4 @@ class DirectChatListView(APIView):
     @swagger_auto_schema(**DIRECT_CHATS_LIST)
     def get(self, request, *args, **kwargs):
         outcome = DirectChatListService.execute({'user': request.user})
-        return Response({"interlocutors": DirectChatListSerializer(outcome, many=True).data})
+        return Response(DirectChatListSerializer(outcome, many=True).data)

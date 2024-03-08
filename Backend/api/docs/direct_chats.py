@@ -19,7 +19,8 @@ DIRECT_CHATS_CREATE = {
                 "application/json": {
                     "interlocutor": {
                         "chat_id": "1",
-                        "username": "Egor",
+                        "first_name": "Egor",
+                        "last_name": "Egorov",
                         "image": "/uploads/colorings/index.jpg"
                     }
                 }
@@ -95,24 +96,26 @@ DIRECT_CHATS_LIST = {
         status.HTTP_200_OK: openapi.Response(
             "Success",
             examples={
-                "application/json": {
-                    "interlocutors": [
+                "application/json":
+                    [
                         {
-                            "username": "Egor",
+                            "first_name": "Egor",
+                            "last_name": "Egorov",
                             "image": "/uploads/colorings/index.jpg",
                             "last_message": "text",
                             "last_message_created": "2024-03-02 14:54:10.122957+00:00",
                             "direct_id": 9
                         },
                         {
-                            "username": "Egor1111",
+                            "first_name": "Egor",
+                            "last_name": "Egorov",
                             "image": "/uploads/colorings/index111.jpg",
                             "last_message": None,
                             "last_message_created": None,
                             "direct_id": 10
                         },
                     ]
-                }
+
             },
         ),
         status.HTTP_401_UNAUTHORIZED: openapi.Response(
