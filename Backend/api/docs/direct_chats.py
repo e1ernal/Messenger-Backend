@@ -7,6 +7,10 @@ DIRECT_CHATS_CREATE = {
                           description="id пользователя с которым хотим создать чат",
                           type=openapi.TYPE_INTEGER,
                           required=True),
+        openapi.Parameter('encrypted_key', openapi.IN_QUERY,
+                          description="приватный ключ",
+                          type=openapi.TYPE_STRING,
+                          required=True),
     ],
     "responses": {
         status.HTTP_201_CREATED: openapi.Response(

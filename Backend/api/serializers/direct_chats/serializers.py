@@ -25,7 +25,8 @@ class DirectChatListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'username',
+            'first_name',
+            'last_name',
             'image',
             'last_message',
             'last_message_created',

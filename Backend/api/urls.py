@@ -4,7 +4,7 @@ from api.views.messages import MessageCreateView
 from conf.yasg import urlpatterns as docs_urls
 from api.views import (VerificationCodeCreateView, VerificationCodeConfirmView, UserCreateView,
                        UserUsernameCheckView, UserMeDetailView, UserSearchView, UserUpdateView,
-                       DirectChatCreateView, DirectChatDeleteView, DirectChatListView, UserDeleteView)
+                       DirectChatCreateView, DirectChatDeleteView, DirectChatListView, UserDeleteView, HomePageRenderView)
 
 urlpatterns = [
     # Codes
@@ -23,7 +23,7 @@ urlpatterns = [
     # Direct chats
     path('direct_chats/', DirectChatListView.as_view()),
     path('direct_chats/<int:id>/', DirectChatDeleteView.as_view()),
-    path('direct_chats/<int:id>/messages/', MessageCreateView.as_view())
+    path('direct_chats/<int:id>/messages/', MessageCreateView.as_view()),
 ]
 
 urlpatterns += docs_urls

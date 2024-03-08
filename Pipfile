@@ -12,6 +12,9 @@ pillow = "*"
 django-rest-swagger = "*"
 drf-yasg = "*"
 django-service-objects = "*"
+channels = "==3.0.4"
+channels-redis = "*"
+redis = "*"
 
 [dev-packages]
 

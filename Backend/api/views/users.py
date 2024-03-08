@@ -1,3 +1,5 @@
+from django.shortcuts import render
+from django.views import View
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
@@ -118,3 +120,11 @@ class UserSearchView(APIView):
             )
         except InvalidInputsError as error:
             return Response(error.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class HomePageRenderView(View):
+
+    def get(self, request, pk):
+        return render(request, 'index.html', context={
+            'pk': pk
+        })

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello world</h1>
+<button id="button">send</button>
+<script type="text/javascript">
+
+        const socket = new WebSocket('ws://127.0.0.1:8000/ws/direct_chat/{{pk}}/');
+
+        socket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            console.log(data)
+        };
+
+        let spam_message = document.getElementById("button");
+        spam_message.onclick = function () {
+            socket.send(JSON.stringify({
+                'type':'message',
+                'message': 'hello',
+                'admin': 'yes',
+            }));
+
+        }
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
