@@ -25,7 +25,7 @@ class DirectChatSerializer(serializers.ModelSerializer):
 
 class DirectChatListSerializer(serializers.ModelSerializer):
     last_message = serializers.CharField(source='last_message.text', default=None)
-    last_message_created = serializers.DateTimeField(source='last_message.created_at')
+    last_message_created = serializers.DateTimeField(source='last_message.created_at', default=None)
     direct_id = serializers.IntegerField()
 
     # def get_last_message_created(self, obj):
