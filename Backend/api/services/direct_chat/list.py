@@ -21,5 +21,6 @@ class DirectChatListService(Service):
             interlocutor = chat.first_user if chat.first_user != self.cleaned_data['user'] else chat.second_user
             interlocutor.last_message = Message.objects.filter(direct=chat).order_by('created_at').last()
             interlocutor.direct_id = chat.id
+            interlocutor.created_at = chat.created_at
             interlocutors.append(interlocutor)
         return interlocutors
