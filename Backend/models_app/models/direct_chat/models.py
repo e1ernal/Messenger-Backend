@@ -6,8 +6,9 @@ class DirectChat(models.Model):
                                    related_name='direct_chats_f')
     second_user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='Второй участник',
                                     related_name='direct_chats_s')
-    encrypted_key = models.CharField(max_length=255, verbose_name='Зашифрованный симметричный ключ')
+    hasher_symmetric_key = models.CharField(max_length=255, verbose_name='Зашифрованный симметричный ключ')
     created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания')
+    is_private = models.BooleanField(verbose_name='Приватный чат?')
 
     def __str__(self):
         return f'chat for {self.first_user.username} and {self.second_user.username}'
