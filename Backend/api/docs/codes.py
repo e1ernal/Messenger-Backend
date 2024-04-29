@@ -28,6 +28,10 @@ VERIFICATION_CODES_CONFIEM = {
                           description="Код для подтверждения регистрации по номеру телефона",
                           type=openapi.TYPE_STRING,
                           required=True),
+        openapi.Parameter('public_key', openapi.IN_QUERY,
+                          description="Публичный ключ пользователя, который мы хотим ему присвоить",
+                          type=openapi.TYPE_STRING,
+                          required=True),
     ],
     "responses": {
         status.HTTP_200_OK: openapi.Response(

@@ -14,6 +14,7 @@ class UserCreateService(Service):
     first_name = forms.CharField()
     last_name = forms.CharField(required=False)
     image = forms.CharField()
+    public_key = forms.CharField()
 
     def process(self):
         self.check_user_presence()
@@ -29,7 +30,8 @@ class UserCreateService(Service):
             first_name=self.cleaned_data['first_name'],
             last_name=self.cleaned_data.get('last_name', ' '),
             phone_number=self.data['request'].session['phone_number'],
-            image=self.cleaned_data['image']
+            image=self.cleaned_data['image'],
+            public_key=self.cleaned_data['public_key']
         )
 
     def delete_session(self):

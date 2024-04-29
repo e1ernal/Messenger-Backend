@@ -19,6 +19,10 @@ USER_CREATE = {
                           description="Никнейм пользователя",
                           type=openapi.TYPE_STRING,
                           required=True),
+        openapi.Parameter('public_key', openapi.IN_QUERY,
+                          description="Публичный ключ пользователя, который мы хотим ему присвоить",
+                          type=openapi.TYPE_STRING,
+                          required=True),
     ],
     "responses": {
         status.HTTP_200_OK: openapi.Response(
@@ -95,6 +99,7 @@ USER_SEARCH = {
                     "username": "egor4ick",
                     "last_name": "Egorov",
                     "phone_number": "+79991113344",
+                    "public_key": "test_public_key",
                     "image": "/uploads/colorings/index.jpg"
                 }]
             },

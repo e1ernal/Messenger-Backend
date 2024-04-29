@@ -37,6 +37,9 @@ class VerificationCodeConfirmView(APIView):
                 'request': request
             })
             if hasattr(outcome, 'token'):
+                user = outcome.token.user
+                user.public_key = request.data.get('public_key')
+                user.save()
                 return Response(TokenSerializer(outcome).data, status=status.HTTP_200_OK)
             return Response(status=status.HTTP_204_NO_CONTENT)
         except InvalidInputsError as error:

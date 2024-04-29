@@ -2,9 +2,11 @@ from django.urls import path
 
 from api.views.messages import MessageListCreateView
 from conf.yasg import urlpatterns as docs_urls
-from api.views import (VerificationCodeCreateView, VerificationCodeConfirmView, UserCreateView,
-                       UserUsernameCheckView, UserMeDetailView, UserSearchView, UserUpdateView,
-                       DirectChatCreateView, DirectChatDeleteView, DirectChatListView, UserDeleteView, HomePageRenderView)
+from api.views import (
+    VerificationCodeCreateView, VerificationCodeConfirmView, UserCreateView,
+    UserUsernameCheckView, UserMeDetailView, UserSearchView, UserUpdateView,
+    DirectChatCreateView, DirectChatDeleteView, DirectChatListView, UserDeleteView, HomePageRenderView
+)
 
 urlpatterns = [
     # Codes

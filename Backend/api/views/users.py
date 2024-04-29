@@ -29,6 +29,7 @@ class UserCreateView(APIView):
                     'first_name': request.data.get('first_name'),
                     'last_name': request.data.get('last_name'),
                     'image': request.data.get('image'),
+                    'public_key': request.data.get('public_key'),
                     'request': request,
                 })
                 request = outcome.data['request']

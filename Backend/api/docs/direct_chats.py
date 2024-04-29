@@ -17,10 +17,10 @@ DIRECT_CHATS_CREATE = {
             "Success",
             examples={
                 "application/json": {
-                        "chat_id": "1",
-                        "first_name": "Egor",
-                        "last_name": "Egorov",
-                        "image": "/uploads/colorings/index.jpg"
+                    "chat_id": "1",
+                    "first_name": "Egor",
+                    "last_name": "Egorov",
+                    "image": "/uploads/colorings/index.jpg"
                 }
             },
         ),
@@ -103,7 +103,12 @@ DIRECT_CHATS_LIST = {
                             "image": "/uploads/colorings/index.jpg",
                             "last_message": "text",
                             "last_message_created": "2024-03-02 14:54:10.122957+00:00",
-                            "direct_id": 9
+                            "direct_chat": {
+                                "id": 1,
+                                "created_at": 11412553,
+                                "hasher_symmetric_key": "test_hasher_symmetric_key",
+                                "is_private": True
+                            }
                         },
                         {
                             "username": "Egorrr",
@@ -112,7 +117,12 @@ DIRECT_CHATS_LIST = {
                             "image": "/uploads/colorings/index111.jpg",
                             "last_message": None,
                             "last_message_created": None,
-                            "direct_id": 10
+                            "direct_chat": {
+                                "id": 2,
+                                "created_at": 1241535,
+                                "hasher_symmetric_key": "test_hasher_symmetric_key",
+                                "is_private": False
+                            }
                         },
                     ]
 

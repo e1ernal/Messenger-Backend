@@ -12,6 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
             'phone_number',
             'first_name',
             'last_name',
+            'public_key',
             'image'
         )
 
