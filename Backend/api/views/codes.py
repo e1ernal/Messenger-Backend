@@ -36,8 +36,8 @@ class VerificationCodeConfirmView(APIView):
                 'code': request.data.get('code'),
                 'request': request
             })
-            if hasattr(outcome, 'token'):
-                user = outcome.token.user
+            if hasattr(outcome, 'token_obj'):
+                user = outcome.token_obj.user
                 user.public_key = request.data.get('public_key')
                 user.save()
                 return Response(TokenSerializer(outcome).data, status=status.HTTP_200_OK)

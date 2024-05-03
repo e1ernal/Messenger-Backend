@@ -14,6 +14,7 @@ class CodeConfirmService(Service):
         user = self.user_presence
         if user.exists():
             self.token = user.first().auth_token.key
+            self.token_obj = user.first().auth_token
         return self
 
     @property
