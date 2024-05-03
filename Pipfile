@@ -15,6 +15,8 @@ django-service-objects = "*"
 channels = "==3.0.4"
 channels-redis = "*"
 redis = "*"
+django-environ = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
