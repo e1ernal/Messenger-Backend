@@ -40,5 +40,5 @@ class DirectChatCreateService(Service):
             first_user=self.cleaned_data['first_user'],
             second_user=self.second_user,
             hasher_symmetric_key=self.cleaned_data.get('hasher_symmetric_key'),
-            is_private=bool(self.cleaned_data.get('encrypted_key'))
+            is_private=bool(self.cleaned_data.get('hasher_symmetric_key'))
         )
