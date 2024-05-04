@@ -21,7 +21,7 @@ class User(AbstractUser):
             'unique': _("A user with that username already exists."),
         },
     )
-    public_key = models.CharField(max_length=255, verbose_name='Публичный ключ')
+    public_key = models.TextField(max_length=255, verbose_name='Публичный ключ')
 
     USERNAME_FIELD = 'phone_number'
 
