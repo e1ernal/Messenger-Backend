@@ -39,5 +39,6 @@ class DirectChatCreateService(Service):
         return DirectChat.objects.create(
             first_user=self.cleaned_data['first_user'],
             second_user=self.second_user,
-            encrypted_key=self.cleaned_data['encrypted_key']
+            encrypted_key=self.cleaned_data.get('encrypted_key'),
+            is_private=bool(self.cleaned_data.get('encrypted_key'))
         )
