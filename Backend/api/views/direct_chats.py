@@ -22,7 +22,7 @@ class DirectChatCreateView(APIView):
             outcome = DirectChatCreateService.execute({
                 'first_user': request.user,
                 'second_user': kwargs['id'],
-                'encrypted_key': request.data.get('encrypted_key')
+                'hasher_symmetric_key': request.data.get('hasher_symmetric_key')
             })
             return Response(DirectChatSerializer(outcome).data, status=status.HTTP_201_CREATED)
         except InvalidInputsError as error:
