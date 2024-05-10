@@ -5,10 +5,14 @@ from conf.yasg import urlpatterns as docs_urls
 from api.views import (
     VerificationCodeCreateView, VerificationCodeConfirmView, UserCreateView,
     UserUsernameCheckView, UserMeDetailView, UserSearchView, UserUpdateView,
-    DirectChatCreateView, DirectChatDeleteView, DirectChatListView, UserDeleteView, HomePageRenderView
+    DirectChatCreateView, DirectChatDeleteView, DirectChatListView, UserDeleteView, HomePageRenderView,
+    UserLogoutView
 )
 
 urlpatterns = [
+    # Auth
+    path('logout/', UserLogoutView.as_view()),
+
     # Codes
     path('verification_codes/', VerificationCodeCreateView.as_view()),
     path('verification_codes/confirm/', VerificationCodeConfirmView.as_view()),

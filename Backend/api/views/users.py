@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.views import View
 from drf_yasg.utils import swagger_auto_schema
@@ -16,6 +17,7 @@ from api.services.user.create import UserCreateService
 from api.services.user.delete import UserDeleteService
 from api.services.user.search import UserSearchService
 from api.services.user.update import UserUpdateService
+from models_app.models import DirectChat
 
 
 class UserCreateView(APIView):
@@ -129,3 +131,17 @@ class HomePageRenderView(View):
         return render(request, 'index.html', context={
             'pk': pk
         })
+
+
+class UserLogoutView(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def post(self, request):
+        DirectChat.objects.filter(
+            Q(first_user=request.user) |
+            Q(second_user=request.user),
+            is_private=True
+        ).delete()
+        request.user.public_key = ""
+        request.user.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
